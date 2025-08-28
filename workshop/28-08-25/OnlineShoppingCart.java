@@ -56,7 +56,6 @@ public class OnlineShoppingCart {
                     totalAmount += getProductPrice(choice) * qty;
                 }
             } while (choice != 5);
-
             totalAmount = calculateFinalAmount(totalAmount);
             System.out.println("Final Bill: Rs. " + totalAmount);
 
@@ -64,7 +63,6 @@ public class OnlineShoppingCart {
             String ans = sc.next();
             moreCustomers = ans.equalsIgnoreCase("yes");
         }
-
         System.out.println("Thank you for shopping!");
         
     }
