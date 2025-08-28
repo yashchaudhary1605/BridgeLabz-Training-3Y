@@ -35,7 +35,6 @@ public class OnlineShoppingCart {
         }
         return totalAmount;
     }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean moreCustomers = true;
