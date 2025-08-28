@@ -39,11 +39,8 @@ public class OnlineShoppingCart {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean moreCustomers = true;
-
         while (moreCustomers) {
             int totalAmount = 0;
-
-         
             int choice;
             do {
                 showMenu();
