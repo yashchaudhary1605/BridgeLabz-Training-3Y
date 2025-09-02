@@ -1,0 +1,63 @@
+import java.util.*;
+
+public class BMICalculator {
+
+    // a. Take user input for weight (kg) and height (cm)
+    public static double[][] takeInput(int n) {
+        Scanner sc = new Scanner(System.in);
+        double[][] data = new double[n][2]; // [weight, height]
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter details for Person " + (i + 1));
+            System.out.print("Weight (kg): ");
+            data[i][0] = sc.nextDouble();
+            System.out.print("Height (cm): ");
+            data[i][1] = sc.nextDouble();
+        }
+        return data;
+    }
+
+    // b. Calculate BMI and status for each person
+    public static String[] calculateBMI(double weight, double heightCm) {
+        double heightM = heightCm / 100.0;  // convert to meters
+        double bmi = weight / (heightM * heightM);
+
+        // round BMI to 2 decimal places
+        bmi = Math.round(bmi * 100.0) / 100.0;
+
+        String status;
+        if (bmi <= 18.4) status = "Underweight";
+        else if (bmi <= 24.9) status = "Normal";
+        else if (bmi <= 39.9) status = "Overweight";
+        else status = "Obese";
+
+        return new String[]{String.valueOf(weight), String.valueOf(heightCm), String.valueOf(bmi), status};
+    }
+
+    // c. Compute BMI for all persons
+    public static String[][] processBMI(double[][] data) {
+        int n = data.length;
+        String[][] results = new String[n][4]; // weight, height, bmi, status
+        for (int i = 0; i < n; i++) {
+            results[i] = calculateBMI(data[i][0], data[i][1]);
+        }
+        return results;
+    }
+
+    // d. Display results in tabular format
+    public static void displayResults(String[][] results) {
+        System.out.println("---------------------------------------------------------");
+        System.out.printf("%-8s %-8s %-8s %-12s\n", "Weight", "Height", "BMI", "Status");
+        System.out.println("---------------------------------------------------------");
+        for (String[] row : results) {
+            System.out.printf("%-8s %-8s %-8s %-12s\n", row[0], row[1], row[2], row[3]);
+        }
+        System.out.println("---------------------------------------------------------");
+    }
+
+    public static void main(String[] args) {
+        int n = 10; // team of 10 members
+        double[][] data = takeInput(n);     // Step a
+        String[][] results = processBMI(data); // Steps b & c
+        displayResults(results);            // Step d
+    }
+}
