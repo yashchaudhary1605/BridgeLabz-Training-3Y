@@ -1,0 +1,59 @@
+import java.util.*;
+
+public class UniqueCharacters {
+
+    // Method to find length without using length()
+    public static int getLength(String text) {
+        int count = 0;
+        try {
+            while (true) {
+                text.charAt(count); // will throw exception when out of bound
+                count++;
+            }
+        } catch (Exception e) {
+            return count;
+        }
+    }
+
+    // Method to find unique characters
+    public static char[] findUniqueChars(String text) {
+        int n = getLength(text);
+        char[] unique = new char[n]; // store possible unique chars
+        int index = 0;
+
+        for (int i = 0; i < n; i++) {
+            char c = text.charAt(i);
+            boolean isUnique = true;
+
+            // check if character already exists
+            for (int j = 0; j < i; j++) {
+                if (text.charAt(j) == c) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                unique[index++] = c;
+            }
+        }
+
+        // create new array with actual unique chars
+        char[] result = new char[index];
+        for (int i = 0; i < index; i++) {
+            result[i] = unique[i];
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
+
+        char[] uniques = findUniqueChars(input);
+        System.out.println("Unique characters: ");
+        for (char c : uniques) {
+            System.out.print(c + " ");
+        }
+    }
+}
